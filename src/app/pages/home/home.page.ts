@@ -8,17 +8,29 @@ import { CoreDataStorageService } from 'src/app/services/core-data-storage.servi
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  obsSubject: Subscription;
+  obsSubscription: Subscription;
 
   constructor(
     private storage: CoreDataStorageService
-  ) { }
+  ) {
+    // this.obsSubscription = this.storage.asObs().subscribe(observer => {
+    //   if (observer) {
+    //     console.log('obs : ', observer);
+    //   }
+    // });
+
+    this.storage.getData();
+    this.obsSubscription = this.storage.booleanSubject.subscribe((value: boolean) => {
+      console.log('the response is : ', value);
+    }, (error: any) => {
+      console.log('Error : ', error);
+    });
+
+  }
 
   ngOnInit() {
-    this.storage.getData();
-    this.obsSubject = this.storage.booleanSubject.subscribe((response: boolean) => {
-      console.log('the response is : ', response);
-    });
+
+
   }
 
 }

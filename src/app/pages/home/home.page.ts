@@ -19,12 +19,14 @@ export class HomePage implements OnInit {
     //   }
     // });
 
-    this.storage.getData();
+
     this.obsSubscription = this.storage.booleanSubject.subscribe((value: boolean) => {
       console.log('the response is : ', value);
     }, (error: any) => {
       console.log('Error : ', error);
     });
+
+    this.storage.getData();
 
   }
 

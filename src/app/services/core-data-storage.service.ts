@@ -8,11 +8,14 @@ export class CoreDataStorageService {
 
   booleanSubject = new Subject<boolean>();
 
-  constructor() { }
+  isValue = true;
+
+  constructor() {
+  }
 
   getData() {
-    this.booleanSubject.next(true);
-    console.log('trigger');
+    this.booleanSubject.next(this.isValue);
+    console.log('trigger', this.booleanSubject);
   }
 
   asObs(): Observable<any> {
